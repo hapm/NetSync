@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 # SharpDevelop 4.0.0.7070
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSync.Core", "NetSync.Core\NetSync.Core.csproj", "{0D17FF85-5934-40A9-9B63-B263C759CA5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSync.Core", "Core\Core.csproj", "{0D17FF85-5934-40A9-9B63-B263C759CA5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
