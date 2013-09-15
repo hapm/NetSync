@@ -1,8 +1,16 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-# SharpDevelop 4.0.0.7070
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.3
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSync.Core", "Core\Core.csproj", "{0D17FF85-5934-40A9-9B63-B263C759CA5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSync.Source.LocalFileSystem", "NetSync.Source.LocalFileSystem\NetSync.Source.LocalFileSystem.csproj", "{DC484967-D4E5-4824-B5AD-0173DAE58C78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSync.MetaData.File", "NetSync.MetaData.File\NetSync.MetaData.File.csproj", "{67F29ECA-1196-42D0-94B6-CF2A28610090}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSyncCrawler", "NetSyncCrawler\NetSyncCrawler.csproj", "{776D63E0-432B-4000-A386-EBB50410DD07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSync.MetaData.SourceConfigDatabase", "NetSync.MetaData.SourceConfigDatabase\NetSync.MetaData.SourceConfigDatabase.csproj", "{59AD4983-7AD0-4445-8614-52BFB2F7C23B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,5 +22,21 @@ Global
 		{0D17FF85-5934-40A9-9B63-B263C759CA5C}.Debug|x86.ActiveCfg = Debug|x86
 		{0D17FF85-5934-40A9-9B63-B263C759CA5C}.Release|x86.Build.0 = Release|x86
 		{0D17FF85-5934-40A9-9B63-B263C759CA5C}.Release|x86.ActiveCfg = Release|x86
+		{DC484967-D4E5-4824-B5AD-0173DAE58C78}.Debug|x86.Build.0 = Debug|x86
+		{DC484967-D4E5-4824-B5AD-0173DAE58C78}.Debug|x86.ActiveCfg = Debug|x86
+		{DC484967-D4E5-4824-B5AD-0173DAE58C78}.Release|x86.Build.0 = Release|x86
+		{DC484967-D4E5-4824-B5AD-0173DAE58C78}.Release|x86.ActiveCfg = Release|x86
+		{67F29ECA-1196-42D0-94B6-CF2A28610090}.Debug|x86.Build.0 = Debug|x86
+		{67F29ECA-1196-42D0-94B6-CF2A28610090}.Debug|x86.ActiveCfg = Debug|x86
+		{67F29ECA-1196-42D0-94B6-CF2A28610090}.Release|x86.Build.0 = Release|x86
+		{67F29ECA-1196-42D0-94B6-CF2A28610090}.Release|x86.ActiveCfg = Release|x86
+		{776D63E0-432B-4000-A386-EBB50410DD07}.Debug|x86.Build.0 = Debug|Any CPU
+		{776D63E0-432B-4000-A386-EBB50410DD07}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{776D63E0-432B-4000-A386-EBB50410DD07}.Release|x86.Build.0 = Release|Any CPU
+		{776D63E0-432B-4000-A386-EBB50410DD07}.Release|x86.ActiveCfg = Release|Any CPU
+		{59AD4983-7AD0-4445-8614-52BFB2F7C23B}.Debug|x86.Build.0 = Debug|Any CPU
+		{59AD4983-7AD0-4445-8614-52BFB2F7C23B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{59AD4983-7AD0-4445-8614-52BFB2F7C23B}.Release|x86.Build.0 = Release|Any CPU
+		{59AD4983-7AD0-4445-8614-52BFB2F7C23B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 EndGlobal
