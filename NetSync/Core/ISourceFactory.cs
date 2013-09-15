@@ -25,7 +25,7 @@ namespace NetSync.Core
 	/// <summary>
 	/// An ISourceFactory is able to create a number of sources.
 	/// </summary>
-	[TypeExtensionPoint]
+	[TypeExtensionPoint(ExtensionAttributeType=typeof(SourceFactoryAttribute))]
 	public interface ISourceFactory
 	{
 		/// <summary>
