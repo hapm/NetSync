@@ -33,3 +33,4 @@ using Mono.Addins;
 
 [assembly: Addin("NetSync.MetaData.FileSystem", "1.0")]
 [assembly: AddinDescription("Provides common properties for crawling of files from a file system.")]
+[assembly: AddinDependency("NetSync", "1.0")]
