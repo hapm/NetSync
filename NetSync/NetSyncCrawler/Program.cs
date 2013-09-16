@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Linq.Expressions;
-using Mono.Addins;
-using NetSync.Core;
-
-// <copyright file="CommonFileProperties.cs" company="IrcShark Team">
+﻿// <copyright file="Program.cs" company="IrcShark Team">
 // Copyright (C) 2009 IrcShark Team
 // </copyright>
 // <author>$Author$</author>
@@ -26,27 +20,75 @@ using NetSync.Core;
 namespace NetSyncCrawler
 {
 	using System;
+	using System.Collections.Generic;
+	using System.Configuration;
+	using System.Linq.Expressions;
+	
+	using Mono.Addins;
+	using NetSync.Core;
 
 	class Program
 	{
-		private static List<ISourceFactory> sourceFactories;
+		private static ExtensionNodeList<TypeExtensionNode<SourceFactoryAttribute>> sourceFactories;
+		private static IDatabase database;
 		
 		public static void Main(string[] args)
 		{
 			Console.WriteLine(String.Format("Loading NetSync {0} ...", typeof(SynchronizableObject).Assembly.GetName().Version));
-			sourceFactories = new List<ISourceFactory>();
 			AddinManager.Initialize(ConfigurationManager.AppSettings["ConfigPath"]);
 			AddinManager.Registry.Update();
-			sourceFactories.AddRange((ISourceFactory[])AddinManager.GetExtensionObjects(typeof(ISourceFactory)));
+			sourceFactories = AddinManager.GetExtensionNodes<TypeExtensionNode<SourceFactoryAttribute>>(typeof(ISourceFactory));
 			if (sourceFactories.Count == 0) {
-				Console.WriteLine("No source types available");
+				Console.WriteLine("No source types available, exiting...");
 			}
 			else {
 				Console.WriteLine(String.Format("Loaded {0} source types", sourceFactories.Count));
 			}
 			
+			foreach (TypeExtensionNode ext in AddinManager.GetExtensionNodes("NetSync/MetaData/Database")) {
+				database = (IDatabase)ext.GetInstance();
+				break;
+			}
+			
+			if (database == null) {
+				Console.WriteLine("No database loaded, exiting...");
+			}
+			else if (database.Sources.Length == 0) {
+				Console.WriteLine("No sources defined in database, exiting...");
+			}
+			else {
+				Console.WriteLine(String.Format("Begin crawling on {0} sources", database.Sources.Length));
+				foreach (Uri sourceUri in database.Sources) {
+					ISourceFactory factory = GetSourceFactory(sourceUri);
+					if (factory == null) {
+						Console.WriteLine("No source factory found for {0}", sourceUri);
+						continue;
+					}
+					
+					ISource src = factory.GetSource(sourceUri);
+					int i = 0;
+					foreach (SynchronizableObject obj in src) {
+						i++;
+					}
+					
+					Console.WriteLine(String.Format("{0}: {1} objects", sourceUri, i));
+				}
+			}
+			
 			Console.Write("Press any key to continue . . . ");
 			Console.ReadKey(true);
+		}
+		
+		private static ISourceFactory GetSourceFactory(Uri sourceId) {
+			foreach (TypeExtensionNode<SourceFactoryAttribute> sf in sourceFactories) {
+				if (sf.Data.Type.Equals(sourceId.Scheme)) {
+					ISourceFactory result = (ISourceFactory)sf.GetInstance(typeof(ISourceFactory));
+					if (result.CanHandle(sourceId))
+						return result;
+				}
+			}
+			
+			return null;
 		}
 	}
 }

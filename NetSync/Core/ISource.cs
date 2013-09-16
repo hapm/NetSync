@@ -29,6 +29,6 @@ namespace NetSync.Core
 	public interface ISource : IEnumerable<SynchronizableObject>
 	{
 		string Type { get; }
-		string Id { get; }
+		Uri Uri { get; }
 	}
 }

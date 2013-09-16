@@ -30,4 +30,6 @@ using Mono.Addins;
 // You can specify all the values or you can use the default the Revision and 
 // Build Numbers by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.*")]
+[assembly: Addin("NetSync.MetaData.SourceConfigDatabase", "1.0")]
+[assembly: AddinDescription("Simple database providing sources from a config file")]
 [assembly: AddinDependency("NetSync", "1.0")]

@@ -33,6 +33,12 @@ namespace NetSync.Core
 		{
 		}
 		
-		public string[] SupportedTypes { get; set; }
+		public SourceFactoryAttribute([NodeAttribute("Type", true, "The type of uris supported by this factory")]string supportedType)
+		{
+			Type = supportedType; 
+		}
+		
+		[NodeAttribute("SupportedTypes", true, "The types of uris supported by this factory")]
+		public string Type { get; set; }
 	}
 }

@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using Mono.Addins;
 using NetSync.Core;
 
 namespace NetSync.MetaData.SourceConfigDatabase
@@ -27,11 +28,12 @@ namespace NetSync.MetaData.SourceConfigDatabase
 	/// <summary>
 	/// Description of MyClass.
 	/// </summary>
+	[Extension("NetSync/MetaData/Database")]
 	public class SourceConfigDatabase : IDatabase
 	{
 		public Uri[] Sources {
 			get {
-				return new Uri[] { new Uri("file://alpha-main/E:/") };
+				return new Uri[] { new Uri("file://alpha-main/E:/Privat/") };
 			}
 		}
 		

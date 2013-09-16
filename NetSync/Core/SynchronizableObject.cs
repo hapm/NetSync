@@ -29,23 +29,23 @@ namespace NetSync.Core
 	public class SynchronizableObject : GenericPropertyCollection
 	{
 		private ISource source;
-		private String objectId;
+		private Uri uri;
 		
-		public SynchronizableObject(ISource source, string objectId) : base()
+		public SynchronizableObject(ISource source, Uri uri) : base()
 		{
 			if (source == null)
 				throw new ArgumentNullException("source");
-			if (objectId == null)
+			if (uri == null)
 				throw new ArgumentNullException("objectId");
 			
 			this.source = source;
-			this.objectId = objectId;
+			this.uri = uri;
 			base.Object = this;
 		}
 		
 		public ISource Source { get { return source; } }
 		
-		public string Id { get { return objectId; } }
+		public Uri Uri { get { return uri; } }
 		
 		public override DateTime LastUpdated {
 			get {

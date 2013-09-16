@@ -19,8 +19,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
+using NetSync.Core;
 
-namespace NetSync.Core
+namespace NetSync.Source.LocalFileSystem
 {
 	/// <summary>
 	/// Description of LocalFileSource.
@@ -28,30 +30,46 @@ namespace NetSync.Core
 	[Serializable]
 	public class LocalFileSource : ISource
 	{
-		public LocalFileSource()
+		private string baseDirectory;
+		private String machineName;
+		
+		public LocalFileSource(DirectoryInfo baseDirectory)
 		{
+			this.baseDirectory = baseDirectory.FullName;
+			this.machineName = System.Environment.MachineName.ToLower();
 		}
 		
 		public System.Collections.Generic.IEnumerator<SynchronizableObject> GetEnumerator()
 		{
-			throw new NotImplementedException();
+			DirectoryInfo dir = new DirectoryInfo(baseDirectory);
+			return new RecursivLocalFileEnumerator(this);
 		}
 		
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			throw new NotImplementedException();
+			return (System.Collections.IEnumerator)this.GetEnumerator();
 		}
 		
-		public string Id {
+		public Uri Uri {
 			get {
-				throw new NotImplementedException();
+				UriBuilder build = new UriBuilder("file", machineName);
+				build.Path = baseDirectory.Replace(Path.PathSeparator, '/');
+				return build.Uri;
 			}
 		}
 		
 		public string Type {
 			get {
-				throw new NotImplementedException();
+				return "file";
 			}
+		}
+		
+		public string MachineName {
+			get { return machineName; }
+		}
+		
+		public DirectoryInfo GetDirectoryInfo() {
+			return new DirectoryInfo(baseDirectory);
 		}
 	}
 }
