@@ -30,17 +30,28 @@ namespace NetSync.Source.LocalFileSystem
 	/// </summary>
 	public class RecursivLocalFileEnumerator : IEnumerator<SynchronizableObject>
 	{
-		private IEnumerator<FileInfo> files;
+		private RecursiveFileEnumerator files;
 		private SynchronizableObject current;
 		private LocalFileSource source;
 		private UriBuilder builder;
 		
+		public delegate void ExceptionThrownEventHandler(Exception ex);
+		
+		public event ExceptionThrownEventHandler ExceptionThrown;
+		
 		public RecursivLocalFileEnumerator(LocalFileSource source)
 		{
-			this.files = source.GetDirectoryInfo().EnumerateFiles("*", SearchOption.AllDirectories).GetEnumerator();
+			this.files = new RecursiveFileEnumerator(source.GetDirectoryInfo());
+			this.files.ExceptionThrown += new RecursiveFileEnumerator.ExceptionThrownEventHandler(files_ExceptionThrown);
 			this.builder = new UriBuilder("file", source.MachineName);
 			this.current = null;
 			this.source = source;
+		}
+
+		private void files_ExceptionThrown(Exception ex)
+		{
+			if (ExceptionThrown != null)
+				ExceptionThrown(ex);
 		}
 		
 		public SynchronizableObject Current {
@@ -58,17 +69,20 @@ namespace NetSync.Source.LocalFileSystem
 		public void Dispose()
 		{
 			files.Dispose();
+			files = null;
 			current = null;
 		}
 		
 		public bool MoveNext()
 		{
-			if (!files.MoveNext())
+			if (files.MoveNext()) {
+				builder.Path = (source.GetDirectoryInfo().FullName + files.CurrentRelativePath).Replace(Path.PathSeparator, '/');
+				current = new SynchronizableObject(source, builder.Uri);
+				return true;
+			}
+			else {
 				return false;
-			
-			builder.Path = files.Current.FullName.Replace(Path.PathSeparator, '/');
-			current = new SynchronizableObject(source, builder.Uri);
-			return true;
+			}
 		}
 		
 		public void Reset()
