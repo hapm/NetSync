@@ -57,14 +57,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultSynchronizableObjectCollection.cs" />
     <Compile Include="GenericProperty.cs" />
     <Compile Include="GenericPropertyCollection.cs" />
     <Compile Include="IDatabase.cs" />
+    <Compile Include="IFilter.cs" />
+    <Compile Include="IFilterProcessor.cs" />
     <Compile Include="IProperty.cs" />
     <Compile Include="IPropertyCollection.cs" />
     <Compile Include="IPropertyFactory.cs" />
     <Compile Include="ISource.cs" />
     <Compile Include="ISourceFactory.cs" />
+    <Compile Include="ISynchronizableObjectCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyPathEnumerator.cs" />
     <Compile Include="SourceFactoryAttribute.cs" />
