@@ -62,7 +62,6 @@
     <Compile Include="GenericPropertyCollection.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IFilter.cs" />
-    <Compile Include="IFilterProcessor.cs" />
     <Compile Include="IProperty.cs" />
     <Compile Include="IPropertyCollection.cs" />
     <Compile Include="IPropertyFactory.cs" />

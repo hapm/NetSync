@@ -35,11 +35,5 @@ namespace NetSync.Core
 		/// <param name="filter">The filter to apply.</param>
 		/// <returns>The resulting collection of SynchronizableObjects.</returns>
 		ISynchronizableObjectCollection ApplyFilter(IFilter filter);
-		
-		/// <summary>
-		/// Gets an instance of the IFilterProcessor used by default to apply filters to the ISynchronizableObjectCollection.
-		/// </summary>
-		/// <returns>The instance of the default IFilterProcessor.</returns>
-		IFilterProcessor<IFilter> GetDefaultProcessor();
 	}
 }
