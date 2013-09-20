@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Mono.Addins;
 using NetSync.Core;
 
@@ -33,7 +34,11 @@ namespace NetSync.MetaData.SourceConfigDatabase
 	{
 		public Uri[] Sources {
 			get {
-				return new Uri[] { new Uri("file://alpha-main/E:/Privat/") };
+				UriBuilder builder = new UriBuilder();
+				builder.Scheme = "file";
+				builder.Host = System.Environment.MachineName;
+				builder.Path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic).Replace(Path.PathSeparator, '/');
+				return new Uri[] { builder.Uri };
 			}
 		}
 		
