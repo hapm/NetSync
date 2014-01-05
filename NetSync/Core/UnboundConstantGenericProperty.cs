@@ -25,9 +25,9 @@ namespace NetSync.Core
 	/// <summary>
 	/// Description of UnboundConstantGenericProperty.
 	/// </summary>
-	public class UnboundConstantGenericProperty
+	public class UnboundConstantGenericProperty<T> : GenericProperty<T> where T : IComparable<T>
 	{
-		public UnboundConstantGenericProperty()
+		public UnboundConstantGenericProperty(T val) : base(null, val)
 		{
 		}
 	}
