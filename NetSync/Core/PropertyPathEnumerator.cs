@@ -39,7 +39,7 @@ namespace NetSync.Core
 		
 		public string Current {
 			get {
-				if (index == -1 || !HasNext)
+				if (index == -1 || index >= levels.Length)
 					return null;
 				
 				return levels[index];
@@ -48,7 +48,7 @@ namespace NetSync.Core
 		
 		object System.Collections.IEnumerator.Current {
 			get {
-				if (index == -1 || !HasNext)
+				if (index == -1 || index >= levels.Length)
 					return null;
 				
 				return levels[index];
@@ -71,7 +71,7 @@ namespace NetSync.Core
 				return false;
 			
 			index++;
-			return false;
+			return true;
 		}
 		
 		public void Reset()
