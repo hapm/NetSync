@@ -19,6 +19,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
+using Mono.Addins;
 using NetSync.Core;
 
 namespace NetSync.Source.LocalFileSystem
@@ -26,6 +28,7 @@ namespace NetSync.Source.LocalFileSystem
 	/// <summary>
 	/// Description of LocalFileGenericPropertyFactory.
 	/// </summary>
+	[Extension]
 	public class LocalFilePropertiesFactory : IPropertyFactory
 	{
 		public LocalFilePropertiesFactory()
@@ -33,14 +36,18 @@ namespace NetSync.Source.LocalFileSystem
 		}
 		
 		public IProperty CreateProperties(SynchronizableObject obj) {
-			if (!this.CanHandle(obj))
+			LocalFileSource source = obj.Source as LocalFileSource;
+			if (source == null)
 				return null;
-			return null;
+
+			IProperty prop = new LocalFileProperties(obj, new FileInfo(obj.Uri.AbsolutePath.TrimStart('/')));
+			obj.SetProperty("file", prop);
+			return prop;
 		}
 		
 		public bool CanHandle(SynchronizableObject obj)
 		{
-			throw new NotImplementedException();
+			return obj.Source is LocalFileSource;
 		}
 	}
 }
