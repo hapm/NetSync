@@ -29,7 +29,7 @@ namespace NetSyncCrawler
 
 	class Program
 	{
-		private static ExtensionNodeList<TypeExtensionNode<SourceFactoryAttribute>> sourceFactories;
+		private static ExtensionNodeList<TypeExtensionNode<SourceFactoryAttribute>> sourceFactories; 
 		private static IDatabase database;
 		
 		public static void Main(string[] args)
@@ -38,6 +38,8 @@ namespace NetSyncCrawler
 			AddinManager.Initialize(ConfigurationManager.AppSettings["ConfigPath"]);
 			AddinManager.Registry.Update();
 			sourceFactories = AddinManager.GetExtensionNodes<TypeExtensionNode<SourceFactoryAttribute>>(typeof(ISourceFactory));
+			IFilter defaultFilter = new PropertyCompareFilter("file.Extension", new UnboundConstantGenericProperty<String>(".mp3"));
+			IPropertyFactory[] propertyFactories = (IPropertyFactory[])AddinManager.GetExtensionObjects(typeof(IPropertyFactory));
 			if (sourceFactories.Count == 0) {
 				Console.WriteLine("No source types available, exiting...");
 			}
@@ -67,11 +69,21 @@ namespace NetSyncCrawler
 					
 					ISource src = factory.GetSource(sourceUri);
 					int i = 0;
+					int matching = 0;
 					foreach (SynchronizableObject obj in src) {
+						foreach (IPropertyFactory propFac in propertyFactories) {
+							if (propFac.CanHandle(obj)) {
+								propFac.CreateProperties(obj);
+								if (defaultFilter.Matches(obj)) {
+									Console.WriteLine("{0}: ", obj.Uri);
+									matching++;
+								}
+							}
+						}
 						i++;
 					}
 					
-					Console.WriteLine(String.Format("{0}: {1} objects", sourceUri, i));
+					Console.WriteLine(String.Format("{0}: {1} objects, {2} matching", sourceUri, i, matching));
 				}
 			}
 			
