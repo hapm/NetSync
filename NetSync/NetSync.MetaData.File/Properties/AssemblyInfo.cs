@@ -30,7 +30,6 @@ using Mono.Addins;
 // You can specify all the values or you can use the default the Revision and 
 // Build Numbers by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.*")]
-
 [assembly: Addin("NetSync.MetaData.FileSystem", "1.0")]
 [assembly: AddinDescription("Provides common properties for crawling of files from a file system.")]
 [assembly: AddinDependency("NetSync", "1.0")]

@@ -33,3 +33,4 @@ using Mono.Addins;
 [assembly: Addin("NetSync.Source.LocalFileSystem", "1.0")]
 [assembly: AddinDescription("Allows crawling of files from the local file system.")]
 [assembly: AddinDependency("NetSync", "1.0")]
+[assembly: AddinDependency("NetSync.MetaData.FileSystem", "1.0")]
