@@ -39,13 +39,16 @@ namespace NetSync.Core
 			this.syncObject = obj;
 		}
 		
-		public IProperty this[string id] {
+		public virtual IProperty this[string id] {
 			get {
 				PropertyInfo prop = GetType().GetProperty(id);
+				if (prop == null)
+					return null;
+				
 				if (prop.PropertyType.IsSubclassOf(typeof(IProperty)))
 				    return (IProperty)prop.GetValue(this, null);
-				else
-					return (IProperty)Activator.CreateInstance(typeof(GenericProperty<>).MakeGenericType(prop.PropertyType), syncObject, prop.GetValue(this, null));
+				
+				return (IProperty)Activator.CreateInstance(typeof(GenericProperty<>).MakeGenericType(prop.PropertyType), syncObject, prop.GetValue(this, null));
 			}
 		}
 		
