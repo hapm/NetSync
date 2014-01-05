@@ -28,7 +28,7 @@ namespace NetSync.Core
 	/// Description of GenericProperty.
 	/// </summary>
 	[DefaultMember("Value"),Serializable]
-	public class GenericProperty<T> : IProperty where T : IComparable<T>, ISerializable
+	public class GenericProperty<T> : IProperty where T : IComparable<T>
 	{
 		private T val;
 		private SynchronizableObject syncObject;
@@ -55,16 +55,11 @@ namespace NetSync.Core
 			get { return val; }
 		}
 		
-		public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
-		{
-			throw new NotImplementedException();
-		}
-		
 		public int CompareTo(IProperty other)
 		{
 			GenericProperty<T> oth2 = other as GenericProperty<T>;
 			if (oth2 == null)
-				return 0;
+				return -1;
 			
 			return val.CompareTo(oth2.val);
 		}
