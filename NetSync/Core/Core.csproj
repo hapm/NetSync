@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndFilter.cs" />
     <Compile Include="DefaultSynchronizableObjectCollection.cs" />
     <Compile Include="GenericProperty.cs" />
     <Compile Include="GenericPropertyCollection.cs" />
@@ -68,10 +69,14 @@
     <Compile Include="ISource.cs" />
     <Compile Include="ISourceFactory.cs" />
     <Compile Include="ISynchronizableObjectCollection.cs" />
+    <Compile Include="NotFilter.cs" />
+    <Compile Include="OrFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyCompareFilter.cs" />
     <Compile Include="PropertyPathEnumerator.cs" />
     <Compile Include="SourceFactoryAttribute.cs" />
     <Compile Include="SynchronizableObject.cs" />
+    <Compile Include="UnboundConstantGenericProperty.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
