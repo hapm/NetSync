@@ -22,6 +22,8 @@ namespace NetSync.Core
     using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    
+    using NetSync.Core.Properties;
 
     /// <summary>
     /// A Syncronizable object can be synchronized over network.

@@ -1,4 +1,4 @@
-﻿// <copyright file="GenericProperty.cs" company="IrcShark Team">
+﻿// <copyright file="GenericFile.cs" company="IrcShark Team">
 // Copyright (C) 2009 IrcShark Team
 // </copyright>
 // <author>$Author$</author>
@@ -17,18 +17,25 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-
-namespace NetSync.Core
+namespace NetSync.Core.Properties
 {
-	/// <summary>
-	/// Description of UnboundConstantGenericProperty.
-	/// </summary>
-	public class UnboundConstantGenericProperty<T> : GenericProperty<T> where T : IComparable<T>
-	{
-		public UnboundConstantGenericProperty(T val) : base(null, val)
-		{
-		}
-	}
+    using System;
+    using Mono.Addins;
+
+    /// <summary>
+    /// Description of IPropertyFactory.
+    /// </summary>
+    [TypeExtensionPoint]
+    public interface IPropertyFactory
+    {
+        /// <summary>
+        /// Creates the properties handled by the current factory for the given ISynchronizable object.
+        /// </summary>
+        IProperty CreateProperties(SynchronizableObject obj);
+        
+        /// <summary>
+        /// Checks if the given ISynchronizable can be handled by this property factory.
+        /// </summary>
+        bool CanHandle(SynchronizableObject obj);
+    }
 }

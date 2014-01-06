@@ -17,12 +17,12 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-
 namespace NetSync.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using NetSync.Core.Filter;
+
 	/// <summary>
 	/// Description of ISynchronizableObjectCollection.
 	/// </summary>

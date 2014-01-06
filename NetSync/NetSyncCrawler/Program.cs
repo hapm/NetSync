@@ -25,7 +25,10 @@ namespace NetSyncCrawler
 	using System.Linq.Expressions;
 	
 	using Mono.Addins;
+	
 	using NetSync.Core;
+    using NetSync.Core.Filter;
+    using NetSync.Core.Properties;
 
 	class Program
 	{

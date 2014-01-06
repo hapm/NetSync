@@ -20,6 +20,7 @@
 namespace NetSync.Core.Filter
 {
     using System;
+    using NetSync.Core.Properties;
 
     /// <summary>
     /// Description of PropertyEqualsValueFilter.

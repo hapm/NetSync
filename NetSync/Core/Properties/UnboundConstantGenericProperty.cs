@@ -1,4 +1,4 @@
-﻿// <copyright file="IPropertyCollection.cs" company="IrcShark Team">
+﻿// <copyright file="GenericProperty.cs" company="IrcShark Team">
 // Copyright (C) 2009 IrcShark Team
 // </copyright>
 // <author>$Author$</author>
@@ -17,21 +17,17 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-namespace NetSync.Core
+namespace NetSync.Core.Properties
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Runtime.Serialization;
+    using System;
 
 	/// <summary>
-	/// Object implementing IPropertyCollection can hold a set of properties, that are all serializable an comperable.
+	/// Description of UnboundConstantGenericProperty.
 	/// </summary>
-	public interface IPropertyCollection : IProperty, IEnumerable<IProperty>
+	public class UnboundConstantGenericProperty<T> : GenericProperty<T> where T : IComparable<T>
 	{
-		IProperty this[string key] { get; }
-		
-		IProperty Follow(PropertyPathEnumerator path);
-		
-		IProperty Follow(string path);
+		public UnboundConstantGenericProperty(T val) : base(null, val)
+		{
+		}
 	}
 }

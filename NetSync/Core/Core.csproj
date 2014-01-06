@@ -8,7 +8,7 @@
     <RootNamespace>NetSync.Core</RootNamespace>
     <AssemblyName>NetSync.Core</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AppDesignerFolder>Assembly</AppDesignerFolder>
     <TargetFrameworkProfile />
     <NoWin32Manifest>False</NoWin32Manifest>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
@@ -57,31 +57,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assembly\AssemblyInfo.cs" />
     <Compile Include="DefaultSynchronizableObjectCollection.cs" />
     <Compile Include="Filter\AndFilter.cs" />
     <Compile Include="Filter\IFilter.cs" />
     <Compile Include="Filter\NotFilter.cs" />
     <Compile Include="Filter\OrFilter.cs" />
     <Compile Include="Filter\PropertyCompareFilter.cs" />
-    <Compile Include="GenericProperty.cs" />
-    <Compile Include="GenericPropertyCollection.cs" />
     <Compile Include="IDatabase.cs" />
-    <Compile Include="IProperty.cs" />
-    <Compile Include="IPropertyCollection.cs" />
-    <Compile Include="IPropertyFactory.cs" />
     <Compile Include="ISource.cs" />
     <Compile Include="ISourceFactory.cs" />
     <Compile Include="ISynchronizableObjectCollection.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyPathEnumerator.cs" />
+    <Compile Include="Properties\GenericProperty.cs" />
+    <Compile Include="Properties\GenericPropertyCollection.cs" />
+    <Compile Include="Properties\IProperty.cs" />
+    <Compile Include="Properties\IPropertyCollection.cs" />
+    <Compile Include="Properties\IPropertyFactory.cs" />
+    <Compile Include="Properties\PropertyPathEnumerator.cs" />
+    <Compile Include="Properties\UnboundConstantGenericProperty.cs" />
     <Compile Include="SourceFactoryAttribute.cs" />
     <Compile Include="SynchronizableObject.cs" />
-    <Compile Include="UnboundConstantGenericProperty.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filter" />
+    <Folder Include="assembly" />
+    <Folder Include="Properties" />
   </ItemGroup>
 </Project>

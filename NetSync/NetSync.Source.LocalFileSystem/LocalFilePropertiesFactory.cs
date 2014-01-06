@@ -17,14 +17,16 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.IO;
-using Mono.Addins;
-using NetSync.Core;
-
 namespace NetSync.Source.LocalFileSystem
 {
+    using System;
+    using System.IO;
+    
+    using Mono.Addins;
+    
+    using NetSync.Core;
+    using NetSync.Core.Properties;
+
 	/// <summary>
 	/// Description of LocalFileGenericPropertyFactory.
 	/// </summary>

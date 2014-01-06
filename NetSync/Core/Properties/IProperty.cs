@@ -17,18 +17,18 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-namespace NetSync.Core
+namespace NetSync.Core.Properties
 {
-	using System;
-	using System.Runtime.Serialization;
+    using System;
+    using System.Runtime.Serialization;
 
-	/// <summary>
-	/// An IProperty represents a property of a synchronizable object.
-	/// </summary>
-	public interface IProperty : IComparable<IProperty>
-	{
-		SynchronizableObject Object { get; }
-		
-		DateTime LastUpdated { get; }
-	}
+    /// <summary>
+    /// An IProperty represents a property of a synchronizable object.
+    /// </summary>
+    public interface IProperty : IComparable<IProperty>
+    {
+        SynchronizableObject Object { get; }
+        
+        DateTime LastUpdated { get; }
+    }
 }

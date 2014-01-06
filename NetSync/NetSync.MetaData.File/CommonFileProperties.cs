@@ -23,6 +23,7 @@ namespace NetSync.MetaData.File
 	using System.Collections.Generic;
 
 	using NetSync.Core;
+	using NetSync.Core.Properties;
 
 	/// <summary>
 	/// Description of MyClass.
