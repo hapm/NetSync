@@ -26,13 +26,16 @@ namespace NetSync.Core.Filter
     /// </summary>
     public class NotFilter : IFilter
     {
+        private IFilter filter;
+        
         public NotFilter(IFilter filter)
         {
+            this.filter = filter;
         }
         
         public bool Matches(SynchronizableObject obj)
         {
-            throw new NotImplementedException();
+            return !filter.Matches(obj);
         }
     }
 }
