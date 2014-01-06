@@ -17,36 +17,35 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-
-namespace NetSync.Core
+namespace NetSync.Core.Filter
 {
-	/// <summary>
-	/// Description of PropertyEqualsValueFilter.
-	/// </summary>
-	public class PropertyCompareFilter : IFilter
-	{
-		string path;
-		IProperty val;
-		
-		public PropertyCompareFilter(string propertyPath, IProperty val)
-		{
-			this.path = propertyPath;
-			this.val = val;
-		}
-		
-		public bool Matches(SynchronizableObject obj)
-		{
-			IComparable<IProperty> prop = obj.Follow(path) as IComparable<IProperty>;
-			if (prop == null) {
-				return val == null;
-			}
-			
-			if (val == null)
-				return false;
-			
-			return prop.CompareTo(val) == 0;
-		}
-	}
+    using System;
+
+    /// <summary>
+    /// Description of PropertyEqualsValueFilter.
+    /// </summary>
+    public class PropertyCompareFilter : IFilter
+    {
+        string path;
+        IProperty val;
+        
+        public PropertyCompareFilter(string propertyPath, IProperty val)
+        {
+            this.path = propertyPath;
+            this.val = val;
+        }
+        
+        public bool Matches(SynchronizableObject obj)
+        {
+            IComparable<IProperty> prop = obj.Follow(path) as IComparable<IProperty>;
+            if (prop == null) {
+                return val == null;
+            }
+            
+            if (val == null)
+                return false;
+            
+            return prop.CompareTo(val) == 0;
+        }
+    }
 }
