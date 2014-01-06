@@ -1,4 +1,4 @@
-﻿// <copyright file="OrFilter.cs" company="IrcShark Team">
+﻿// <copyright file="IFilter.cs" company="IrcShark Team">
 // Copyright (C) 2009 IrcShark Team
 // </copyright>
 // <author>$Author$</author>
@@ -17,32 +17,17 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-
-namespace NetSync.Core
+namespace NetSync.Core.Filter
 {
-	/// <summary>
-	/// The AndFilter matches if all of the given filters match the given object.
-	/// </summary>
-	public class AndFilter : IFilter
-	{
-		private IEnumerable<IFilter> filters;
-		
-		public AndFilter(IEnumerable<IFilter> filters)
-		{
-			this.filters = filters;
-		}
-		
-		public bool Matches(SynchronizableObject obj)
-		{
-			foreach (IFilter filter in filters) {
-				if (!filter.Matches(obj))
-					return false;
-			}
-			
-			return true;
-		}
-	}
+    using System;
+    using Mono.Addins;
+
+    /// <summary>
+    /// Description of IFilter.
+    /// </summary>
+    [TypeExtensionPoint]
+    public interface IFilter
+    {
+        bool Matches(SynchronizableObject obj);
+    }
 }
