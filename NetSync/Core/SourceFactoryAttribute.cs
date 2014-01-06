@@ -23,22 +23,22 @@ using Mono.Addins;
 
 namespace NetSync.Core
 {
-	/// <summary>
-	/// Description of SourceFactoryAttribute.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Class)]
-	public class SourceFactoryAttribute : CustomExtensionAttribute
-	{
-		public SourceFactoryAttribute()
-		{
-		}
-		
-		public SourceFactoryAttribute([NodeAttribute("Type", true, "The type of uris supported by this factory")]string supportedType)
-		{
-			Type = supportedType; 
-		}
-		
-		[NodeAttribute("Type", true, "The types of uris supported by this factory")]
-		public string Type { get; set; }
-	}
+    /// <summary>
+    /// Description of SourceFactoryAttribute.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class SourceFactoryAttribute : CustomExtensionAttribute
+    {
+        public SourceFactoryAttribute()
+        {
+        }
+        
+        public SourceFactoryAttribute([NodeAttribute("Type", true, "The type of uris supported by this factory")]string supportedType)
+        {
+            Type = supportedType; 
+        }
+        
+        [NodeAttribute("Type", true, "The types of uris supported by this factory")]
+        public string Type { get; set; }
+    }
 }

@@ -19,16 +19,16 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace NetSync.Core
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Runtime.Serialization;
+    using System;
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
 
-	/// <summary>
-	/// Description of ISynchronizationSource.
-	/// </summary>
-	public interface ISource : IEnumerable<SynchronizableObject>
-	{
-		string Type { get; }
-		Uri Uri { get; }
-	}
+    /// <summary>
+    /// Description of ISynchronizationSource.
+    /// </summary>
+    public interface ISource : IEnumerable<SynchronizableObject>
+    {
+        string Type { get; }
+        Uri Uri { get; }
+    }
 }

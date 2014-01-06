@@ -27,29 +27,29 @@ namespace NetSync.Source.LocalFileSystem
     using NetSync.Core;
     using NetSync.Core.Properties;
 
-	/// <summary>
-	/// Description of LocalFileGenericPropertyFactory.
-	/// </summary>
-	[Extension]
-	public class LocalFilePropertiesFactory : IPropertyFactory
-	{
-		public LocalFilePropertiesFactory()
-		{
-		}
-		
-		public IProperty CreateProperties(SynchronizableObject obj) {
-			LocalFileSource source = obj.Source as LocalFileSource;
-			if (source == null)
-				return null;
+    /// <summary>
+    /// Description of LocalFileGenericPropertyFactory.
+    /// </summary>
+    [Extension]
+    public class LocalFilePropertiesFactory : IPropertyFactory
+    {
+        public LocalFilePropertiesFactory()
+        {
+        }
+        
+        public IProperty CreateProperties(SynchronizableObject obj) {
+            LocalFileSource source = obj.Source as LocalFileSource;
+            if (source == null)
+                return null;
 
-			IProperty prop = new LocalFileProperties(obj, new FileInfo(obj.Uri.AbsolutePath.TrimStart('/')));
-			obj.SetProperty("file", prop);
-			return prop;
-		}
-		
-		public bool CanHandle(SynchronizableObject obj)
-		{
-			return obj.Source is LocalFileSource;
-		}
-	}
+            IProperty prop = new LocalFileProperties(obj, new FileInfo(obj.Uri.AbsolutePath.TrimStart('/')));
+            obj.SetProperty("file", prop);
+            return prop;
+        }
+        
+        public bool CanHandle(SynchronizableObject obj)
+        {
+            return obj.Source is LocalFileSource;
+        }
+    }
 }

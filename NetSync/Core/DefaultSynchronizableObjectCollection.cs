@@ -25,21 +25,21 @@ namespace NetSync.Core
     
     using NetSync.Core.Filter;
 
-	/// <summary>
-	/// Description of DefaultSynchronizableObjectCollection.
-	/// </summary>
-	public class DefaultSynchronizableObjectCollection : List<SynchronizableObject>, ISynchronizableObjectCollection
-	{
-		public ISynchronizableObjectCollection ApplyFilter(IFilter filter)
-		{
-			DefaultSynchronizableObjectCollection newCol = new DefaultSynchronizableObjectCollection();
-			foreach (SynchronizableObject obj in this) {
-				if (filter.Matches(obj)) {
-					newCol.Add(obj);
-				}
-			}
-			
-			return newCol;
-		}
-	}
+    /// <summary>
+    /// Description of DefaultSynchronizableObjectCollection.
+    /// </summary>
+    public class DefaultSynchronizableObjectCollection : List<SynchronizableObject>, ISynchronizableObjectCollection
+    {
+        public ISynchronizableObjectCollection ApplyFilter(IFilter filter)
+        {
+            DefaultSynchronizableObjectCollection newCol = new DefaultSynchronizableObjectCollection();
+            foreach (SynchronizableObject obj in this) {
+                if (filter.Matches(obj)) {
+                    newCol.Add(obj);
+                }
+            }
+            
+            return newCol;
+        }
+    }
 }

@@ -24,52 +24,52 @@ using NetSync.Core;
 
 namespace NetSync.Source.LocalFileSystem
 {
-	/// <summary>
-	/// Description of LocalFileSource.
-	/// </summary>
-	[Serializable]
-	public class LocalFileSource : ISource
-	{
-		private string baseDirectory;
-		private String machineName;
-		
-		public LocalFileSource(DirectoryInfo baseDirectory)
-		{
-			this.baseDirectory = baseDirectory.FullName;
-			this.machineName = System.Environment.MachineName.ToLower();
-		}
-		
-		public System.Collections.Generic.IEnumerator<SynchronizableObject> GetEnumerator()
-		{
-			DirectoryInfo dir = new DirectoryInfo(baseDirectory);
-			return new RecursivLocalFileEnumerator(this);
-		}
-		
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return (System.Collections.IEnumerator)this.GetEnumerator();
-		}
-		
-		public Uri Uri {
-			get {
-				UriBuilder build = new UriBuilder("file", machineName);
-				build.Path = baseDirectory.Replace(Path.PathSeparator, '/');
-				return build.Uri;
-			}
-		}
-		
-		public string Type {
-			get {
-				return "file";
-			}
-		}
-		
-		public string MachineName {
-			get { return machineName; }
-		}
-		
-		public DirectoryInfo GetDirectoryInfo() {
-			return new DirectoryInfo(baseDirectory);
-		}
-	}
+    /// <summary>
+    /// Description of LocalFileSource.
+    /// </summary>
+    [Serializable]
+    public class LocalFileSource : ISource
+    {
+        private string baseDirectory;
+        private String machineName;
+        
+        public LocalFileSource(DirectoryInfo baseDirectory)
+        {
+            this.baseDirectory = baseDirectory.FullName;
+            this.machineName = System.Environment.MachineName.ToLower();
+        }
+        
+        public System.Collections.Generic.IEnumerator<SynchronizableObject> GetEnumerator()
+        {
+            DirectoryInfo dir = new DirectoryInfo(baseDirectory);
+            return new RecursivLocalFileEnumerator(this);
+        }
+        
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return (System.Collections.IEnumerator)this.GetEnumerator();
+        }
+        
+        public Uri Uri {
+            get {
+                UriBuilder build = new UriBuilder("file", machineName);
+                build.Path = baseDirectory.Replace(Path.PathSeparator, '/');
+                return build.Uri;
+            }
+        }
+        
+        public string Type {
+            get {
+                return "file";
+            }
+        }
+        
+        public string MachineName {
+            get { return machineName; }
+        }
+        
+        public DirectoryInfo GetDirectoryInfo() {
+            return new DirectoryInfo(baseDirectory);
+        }
+    }
 }

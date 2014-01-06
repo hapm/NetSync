@@ -26,26 +26,26 @@ using NetSync.Core;
 
 namespace NetSync.MetaData.SourceConfigDatabase
 {
-	/// <summary>
-	/// Description of MyClass.
-	/// </summary>
-	[Extension("NetSync/MetaData/Database")]
-	public class SourceConfigDatabase : IDatabase
-	{
-		public Uri[] Sources {
-			get {
-				UriBuilder builder = new UriBuilder();
-				builder.Scheme = "file";
-				builder.Host = System.Environment.MachineName;
-				builder.Path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic).Replace(Path.PathSeparator, '/');
-				return new Uri[] { builder.Uri };
-			}
-		}
-		
-		public SynchronizableObject[] Objects {
-			get {
-				return new SynchronizableObject[0];
-			}
-		}
-	}
+    /// <summary>
+    /// Description of MyClass.
+    /// </summary>
+    [Extension("NetSync/MetaData/Database")]
+    public class SourceConfigDatabase : IDatabase
+    {
+        public Uri[] Sources {
+            get {
+                UriBuilder builder = new UriBuilder();
+                builder.Scheme = "file";
+                builder.Host = System.Environment.MachineName;
+                builder.Path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic).Replace(Path.PathSeparator, '/');
+                return new Uri[] { builder.Uri };
+            }
+        }
+        
+        public SynchronizableObject[] Objects {
+            get {
+                return new SynchronizableObject[0];
+            }
+        }
+    }
 }

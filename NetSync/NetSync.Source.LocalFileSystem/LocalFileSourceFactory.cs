@@ -25,45 +25,45 @@ using NetSync.Core;
 
 namespace NetSync.Source.LocalFileSystem
 {
-	/// <summary>
-	/// Description of LocalFileSourceFactory.
-	/// </summary>
-	[SourceFactory("file")]
-	public class LocalFileSourceFactory : ISourceFactory
-	{
-		public LocalFileSourceFactory()
-		{
-		}
-		
-		public bool CanHandle(Uri sourceId)
-		{
-			if (!sourceId.Scheme.Equals("file"))
-				return false;
-			if (!sourceId.Host.Equals(System.Environment.MachineName.ToLower()))
-				return false;
-			
-			return true;
-		}
-		
-		public ISource GetSource(Uri sourceId, bool create)
-		{
-			if (sourceId == null)
-				throw new ArgumentNullException("sourceId");
-			
-			if (!CanHandle(sourceId))
-				throw new ArgumentException(String.Format("The given source address \"{0}\" can't be handled by the LocalFileSystem source factory", sourceId), "sourceId");
-			
-			DirectoryInfo baseDirectory = new DirectoryInfo(sourceId.AbsolutePath.Substring(1));
-			if (!baseDirectory.Exists) {
-				if (create) {
-					throw new NotImplementedException();
-				}
-				else 
-					throw new ArgumentException("Source coudln't be found on the system", "sourceId");
-			}
-			
-			LocalFileSource result = new LocalFileSource(baseDirectory);
-			return result;
-		}
-	}
+    /// <summary>
+    /// Description of LocalFileSourceFactory.
+    /// </summary>
+    [SourceFactory("file")]
+    public class LocalFileSourceFactory : ISourceFactory
+    {
+        public LocalFileSourceFactory()
+        {
+        }
+        
+        public bool CanHandle(Uri sourceId)
+        {
+            if (!sourceId.Scheme.Equals("file"))
+                return false;
+            if (!sourceId.Host.Equals(System.Environment.MachineName.ToLower()))
+                return false;
+            
+            return true;
+        }
+        
+        public ISource GetSource(Uri sourceId, bool create)
+        {
+            if (sourceId == null)
+                throw new ArgumentNullException("sourceId");
+            
+            if (!CanHandle(sourceId))
+                throw new ArgumentException(String.Format("The given source address \"{0}\" can't be handled by the LocalFileSystem source factory", sourceId), "sourceId");
+            
+            DirectoryInfo baseDirectory = new DirectoryInfo(sourceId.AbsolutePath.Substring(1));
+            if (!baseDirectory.Exists) {
+                if (create) {
+                    throw new NotImplementedException();
+                }
+                else 
+                    throw new ArgumentException("Source coudln't be found on the system", "sourceId");
+            }
+            
+            LocalFileSource result = new LocalFileSource(baseDirectory);
+            return result;
+        }
+    }
 }

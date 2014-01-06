@@ -25,24 +25,24 @@ using NetSync.MetaData.File;
 
 namespace NetSync.Core
 {
-	/// <summary>
-	/// Description of LocalSynchronizableFile.
-	/// </summary>
-	[Serializable]
-	public class LocalFileProperties : CommonFileProperties
-	{
-		private DateTime lastUpdated;
-		
-		public LocalFileProperties(SynchronizableObject obj, FileInfo localFile) : base(obj) {
-			Name = localFile.Name;
-			Extension = localFile.Extension;
-			lastUpdated = DateTime.Now;
-		}
-		
-		public override DateTime LastUpdated {
-			get {
-				return lastUpdated;
-			}
-		}
-	}
+    /// <summary>
+    /// Description of LocalSynchronizableFile.
+    /// </summary>
+    [Serializable]
+    public class LocalFileProperties : CommonFileProperties
+    {
+        private DateTime lastUpdated;
+        
+        public LocalFileProperties(SynchronizableObject obj, FileInfo localFile) : base(obj) {
+            Name = localFile.Name;
+            Extension = localFile.Extension;
+            lastUpdated = DateTime.Now;
+        }
+        
+        public override DateTime LastUpdated {
+            get {
+                return lastUpdated;
+            }
+        }
+    }
 }

@@ -19,23 +19,23 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace NetSync.MetaData.File
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	using NetSync.Core;
-	using NetSync.Core.Properties;
+    using NetSync.Core;
+    using NetSync.Core.Properties;
 
-	/// <summary>
-	/// Description of MyClass.
-	/// </summary>
-	public abstract class CommonFileProperties : GenericPropertyCollection
-	{		
-		public CommonFileProperties(SynchronizableObject obj) : base(obj)
-		{
-		}
-		
-		public string Name { get; protected set; }
-		public string Extension { get; protected set; }
-		public long Length { get; protected set; }
-	}
+    /// <summary>
+    /// Description of MyClass.
+    /// </summary>
+    public abstract class CommonFileProperties : GenericPropertyCollection
+    {        
+        public CommonFileProperties(SynchronizableObject obj) : base(obj)
+        {
+        }
+        
+        public string Name { get; protected set; }
+        public string Extension { get; protected set; }
+        public long Length { get; protected set; }
+    }
 }

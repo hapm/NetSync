@@ -24,141 +24,141 @@ using System.IO;
 
 namespace NetSync.Source.LocalFileSystem
 {
-	/// <summary>
-	/// Description of RecursiveFileEnumerator.
-	/// </summary>
-	public class RecursiveFileEnumerator : IEnumerator<FileInfo>
-	{
-		private IEnumerator<FileInfo> files;
-		private IEnumerator<DirectoryInfo> dirs;
-		private DirectoryInfo baseDir;
-		private RecursiveFileEnumerator currentSubDir;
-		
-		public delegate void ExceptionThrownEventHandler(Exception ex);
-		
-		public event ExceptionThrownEventHandler ExceptionThrown;
-		
-		public RecursiveFileEnumerator(DirectoryInfo baseDirectory)
-		{
-			baseDir = baseDirectory;
-			files = baseDir.EnumerateFiles().GetEnumerator();
-			dirs = baseDir.EnumerateDirectories().GetEnumerator();
-		}
-		
-		public FileInfo Current {
-			get {
-				if (files != null)
-					return files.Current;
-				
-				if (currentSubDir != null)
-					return currentSubDir.Current;
-				
-				return null;
-			}
-		}
-		
-		public string CurrentRelativePath {
-			get {
-				if (files != null) {
-					if (files.Current != null)
-						return files.Current.Name;
-					else
-						return null;
-				}
-				
-				if (currentSubDir != null && currentSubDir.Current != null) 
-					return dirs.Current.Name + Path.PathSeparator + currentSubDir.CurrentRelativePath;
-				else 
-					return null;
-			}
-		}
-		
-		object System.Collections.IEnumerator.Current {
-			get {
-				return Current;
-			}
-		}
-		
-		public void Dispose()
-		{
-			AllToNull();
-		}
+    /// <summary>
+    /// Description of RecursiveFileEnumerator.
+    /// </summary>
+    public class RecursiveFileEnumerator : IEnumerator<FileInfo>
+    {
+        private IEnumerator<FileInfo> files;
+        private IEnumerator<DirectoryInfo> dirs;
+        private DirectoryInfo baseDir;
+        private RecursiveFileEnumerator currentSubDir;
+        
+        public delegate void ExceptionThrownEventHandler(Exception ex);
+        
+        public event ExceptionThrownEventHandler ExceptionThrown;
+        
+        public RecursiveFileEnumerator(DirectoryInfo baseDirectory)
+        {
+            baseDir = baseDirectory;
+            files = baseDir.EnumerateFiles().GetEnumerator();
+            dirs = baseDir.EnumerateDirectories().GetEnumerator();
+        }
+        
+        public FileInfo Current {
+            get {
+                if (files != null)
+                    return files.Current;
+                
+                if (currentSubDir != null)
+                    return currentSubDir.Current;
+                
+                return null;
+            }
+        }
+        
+        public string CurrentRelativePath {
+            get {
+                if (files != null) {
+                    if (files.Current != null)
+                        return files.Current.Name;
+                    else
+                        return null;
+                }
+                
+                if (currentSubDir != null && currentSubDir.Current != null) 
+                    return dirs.Current.Name + Path.PathSeparator + currentSubDir.CurrentRelativePath;
+                else 
+                    return null;
+            }
+        }
+        
+        object System.Collections.IEnumerator.Current {
+            get {
+                return Current;
+            }
+        }
+        
+        public void Dispose()
+        {
+            AllToNull();
+        }
 
-		private void AllToNull()
-		{
-			if (files != null) {
-				files.Dispose();
-				files = null;
-			}
+        private void AllToNull()
+        {
+            if (files != null) {
+                files.Dispose();
+                files = null;
+            }
 
-			if (dirs != null) {
-				dirs.Dispose();
-				dirs = null;
-			}
+            if (dirs != null) {
+                dirs.Dispose();
+                dirs = null;
+            }
 
-			if (currentSubDir != null) {
-				currentSubDir.Dispose();
-				currentSubDir = null;
-			}
-		}
-		
-		public bool MoveNext()
-		{
-			if (files != null) {
-				if (!files.MoveNext()) {
-					files.Dispose();
-					files = null;
-				}
-				else
-					return true;
-			}
-			
-			if (dirs == null)
-				return false;
-			
-			while (currentSubDir == null || !currentSubDir.MoveNext()) {
-				if (currentSubDir != null) {
-					currentSubDir.Dispose();
-					currentSubDir = null;
-				}
-				
-				while (currentSubDir == null) {
-					if (dirs.MoveNext()) {
-						try {
-							currentSubDir = new RecursiveFileEnumerator(dirs.Current);
-							currentSubDir.ExceptionThrown += new ExceptionThrownEventHandler(subDir_ExceptionThrown);
-						}
-						catch (Exception ex) {
-							OnExceptionThrown(ex);
-						}
-					}
-					else {
-						dirs.Dispose();
-						dirs = null;
-						return false;
-					}
-				}
-			}
-			
-			return true;
-		}
+            if (currentSubDir != null) {
+                currentSubDir.Dispose();
+                currentSubDir = null;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (files != null) {
+                if (!files.MoveNext()) {
+                    files.Dispose();
+                    files = null;
+                }
+                else
+                    return true;
+            }
+            
+            if (dirs == null)
+                return false;
+            
+            while (currentSubDir == null || !currentSubDir.MoveNext()) {
+                if (currentSubDir != null) {
+                    currentSubDir.Dispose();
+                    currentSubDir = null;
+                }
+                
+                while (currentSubDir == null) {
+                    if (dirs.MoveNext()) {
+                        try {
+                            currentSubDir = new RecursiveFileEnumerator(dirs.Current);
+                            currentSubDir.ExceptionThrown += new ExceptionThrownEventHandler(subDir_ExceptionThrown);
+                        }
+                        catch (Exception ex) {
+                            OnExceptionThrown(ex);
+                        }
+                    }
+                    else {
+                        dirs.Dispose();
+                        dirs = null;
+                        return false;
+                    }
+                }
+            }
+            
+            return true;
+        }
 
-		private void subDir_ExceptionThrown(Exception ex)
-		{
-			OnExceptionThrown(ex);
-		}
+        private void subDir_ExceptionThrown(Exception ex)
+        {
+            OnExceptionThrown(ex);
+        }
 
-		private void OnExceptionThrown(Exception ex)
-		{
-			if (ExceptionThrown != null)
-				ExceptionThrown(ex);
-		}
-		
-		public void Reset()
-		{
-			AllToNull();
-			files = baseDir.EnumerateFiles().GetEnumerator();
-			dirs = baseDir.EnumerateDirectories().GetEnumerator();
-		}
-	}
+        private void OnExceptionThrown(Exception ex)
+        {
+            if (ExceptionThrown != null)
+                ExceptionThrown(ex);
+        }
+        
+        public void Reset()
+        {
+            AllToNull();
+            files = baseDir.EnumerateFiles().GetEnumerator();
+            dirs = baseDir.EnumerateDirectories().GetEnumerator();
+        }
+    }
 }

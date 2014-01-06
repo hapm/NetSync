@@ -23,17 +23,17 @@ namespace NetSync.Core
     using System.Collections.Generic;
     using NetSync.Core.Filter;
 
-	/// <summary>
-	/// Description of ISynchronizableObjectCollection.
-	/// </summary>
-	public interface ISynchronizableObjectCollection : ICollection<SynchronizableObject>
-	{
-		/// <summary>
-		/// Applys the given filter to all elements in the ISynchronizableObjectCollection and returns the subset 
-		/// of SynchronizableObjects as a new ISynchronizableObjectCollection using its default IFilterProcessor.
-		/// </summary>
-		/// <param name="filter">The filter to apply.</param>
-		/// <returns>The resulting collection of SynchronizableObjects.</returns>
-		ISynchronizableObjectCollection ApplyFilter(IFilter filter);
-	}
+    /// <summary>
+    /// Description of ISynchronizableObjectCollection.
+    /// </summary>
+    public interface ISynchronizableObjectCollection : ICollection<SynchronizableObject>
+    {
+        /// <summary>
+        /// Applys the given filter to all elements in the ISynchronizableObjectCollection and returns the subset 
+        /// of SynchronizableObjects as a new ISynchronizableObjectCollection using its default IFilterProcessor.
+        /// </summary>
+        /// <param name="filter">The filter to apply.</param>
+        /// <returns>The resulting collection of SynchronizableObjects.</returns>
+        ISynchronizableObjectCollection ApplyFilter(IFilter filter);
+    }
 }

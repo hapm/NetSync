@@ -23,13 +23,13 @@ using Mono.Addins;
 
 namespace NetSync.Core
 {
-	/// <summary>
-	/// An IDatabase holds all the configured sources and cached SynchronizableObjects.
-	/// </summary>
-	[TypeExtensionPoint("NetSync/MetaData/Database")]
-	public interface IDatabase
-	{
-		Uri[] Sources { get; }
-		SynchronizableObject[] Objects { get; }
-	}
+    /// <summary>
+    /// An IDatabase holds all the configured sources and cached SynchronizableObjects.
+    /// </summary>
+    [TypeExtensionPoint("NetSync/MetaData/Database")]
+    public interface IDatabase
+    {
+        Uri[] Sources { get; }
+        SynchronizableObject[] Objects { get; }
+    }
 }
